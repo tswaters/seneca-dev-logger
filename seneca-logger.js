@@ -34,10 +34,20 @@ function preload () {
 
     let type = payload.level || '-'
     let kind = payload.kind || 'message'
-    let text = payload.pattern || payload.notice || payload[0] || '-'
+    let text = null
     let stack = null
 
-    if (payload.err) {
+    // special case for mesh, showing add/remove. omit the last parameter of payload.
+    if (payload.plugin_name === 'mesh' && ['add', 'remove'].indexOf(payload[0]) > -1) {
+      text = `MESH: ${Array.from(payload).slice(0, 2).join(' ')}`
+    }
+
+    // if we get multiple paremeters pass them along (usually in the form `seneca.log.info('multiple', 'params'))
+    else if (payload.length) {
+      text = Array.from(payload).join(' ')
+    }
+
+    else if (payload.err) {
 
       text = ''
 
@@ -59,6 +69,11 @@ function preload () {
 
     }
 
+    // if no messages, log pattern/notice or '-'
+    else {
+      text = payload.pattern || payload.notice || '-'
+    }
+
     if (payload.options) {
       kind = 'options'
       text = JSON.stringify(payload.options)
@@ -66,7 +81,7 @@ function preload () {
 
     console.log(
       new Date(payload.when).toJSON(),
-      payload.seneca.padStart(50),
+      context.id.padStart(50),
       kind.padStart(8),
       type.padStart(8),
       text

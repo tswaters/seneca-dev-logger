@@ -1,6 +1,6 @@
 {
   "name": "seneca-dev-logger",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Seneca logger useful for development",
   "main": "seneca-logger.js",
   "scripts": {},
