@@ -1,0 +1,27 @@
+{
+  "name": "seneca-dev-logger",
+  "version": "0.0.1",
+  "description": "Seneca logger useful for development",
+  "main": "seneca-logger.js",
+  "scripts": {},
+  "keywords": [
+    "seneca",
+    "log",
+    "logger",
+    "development"
+  ],
+  "engines": {
+    "node": ">4"
+  },
+  "author": "Tyler Waters <tyler.waters@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "seneca": ">=3"
+  },
+  "devDependencies": {
+    "seneca": "^3.4.2"
+  },
+  "dependencies": {
+    "seneca-log-filter": "^0.1.0"
+  }
+}
